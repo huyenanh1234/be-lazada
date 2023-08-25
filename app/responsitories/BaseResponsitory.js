@@ -27,7 +27,7 @@ class BaseResponsitory{
         )
         return true;
     }
-
+   
     async paginate(limit=10, page=1, conditions={}){
         const[data, total] = await Promise.all([
             this.getModel().find(conditions).skip(limit*(page-1)).limit(limit),

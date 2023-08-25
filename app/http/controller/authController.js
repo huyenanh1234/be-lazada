@@ -4,13 +4,13 @@ import User from "../../models/user.js";
 import {generateJWTToken, hashHmacString, 
     responseSuccess, responseErrors, 
     responseJsonByStatus} from "../../common/helper.js";
+import UserService from "../../services/UserService.js";
 
 class AuthController {
+    static userService = new UserService();
     async login(req, res) {
         const {phone, password} = req.body;
-        const user = await User.findOne({
-            phone
-        })
+        const user = await AuthController.userService.findByPhone(phone);
 
         if (!user) {
             return responseJsonByStatus(
@@ -27,9 +27,14 @@ class AuthController {
                 401
             );
         }
-        // res.json({
-        //     user_token:generateJWTToken(user._id)
-        // })
+        
+        if(user.level===3){
+            return responseJsonByStatus(
+                res, 
+                responseErrors(401,'Bạn không có quyền đăng nhập vào fe admin'),
+                401
+            );
+        }
 
         return responseJsonByStatus(
             res,
@@ -39,6 +44,10 @@ class AuthController {
                 }
             ),
         )
+    }
+
+    async logout(req, res){
+
     }
 }
 

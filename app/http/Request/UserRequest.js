@@ -53,5 +53,30 @@ const validationsIndexUser=[
         }
     })
 ]
+
+const validationsChangePassword =[
+    body('oldPass').custom(async oldPassValue=>{
+        // if (typeof oldPassValue !== 'string') {
+        //     throw new Error('mật khẩu phải là kiểu chuỗi')
+        // }
+
+        // if (oldPassValue.length < 8) {
+        //     throw new Error('mật khẩu không được dưới 8 ký tự')
+        // }
+
+    }),
+
+    body('newPass').custom(async newPassValue=>{
+        // if (typeof newPassValue !== 'string') {
+        //     throw new Error('mật khẩu phải là kiểu chuỗi')
+        // }
+
+        // if (newPassValue.length < 8) {
+        //     throw new Error('mật khẩu không được dưới 8 ký tự')
+        // }
+
+    })
+]
+export const validateChangePassword = baseRequest(validationsChangePassword);
 export const validateStoreOrUpdateUser = baseRequest(validationsStoreOrUpdateUser);
 export const validateIndexUser = baseRequest(validationsIndexUser);

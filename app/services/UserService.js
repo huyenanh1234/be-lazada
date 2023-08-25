@@ -6,6 +6,21 @@ class userService{
         this.userResponsitory = new userResponsitory();
     }
 
+    async findByPhone(phone){
+        return await this.userResponsitory.findByPhone(phone);
+    }
+    async findById(authId){
+        return await this.userResponsitory.findById(authId)
+    }
+    async changePassword(newPass, user){
+        const passUpdate={};
+        if(newPass){
+            passUpdate.password=hashHmacString(newPass);
+        }
+
+        return await this.userResponsitory.update(passUpdate,user.id,user.id);
+    }
+    
     async store(dataUser, userId){
         if(!dataUser.password){
             dataUser.password = hashHmacString('12345678');
