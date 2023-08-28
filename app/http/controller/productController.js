@@ -1,12 +1,17 @@
 import { responseJsonByStatus, responseSuccess, responseErrors } from "../../common/helper.js";
 import Product from "../../models/product.js";
+import ProductService from "../../services/ProductService.js";
 class productController{
+    static productService = new ProductService();
     async store(req, res) {
         try {
             const data = {
                 ...req.body
             }
-            const product = await Product.create(data);
+            const product = await productController.productService.store(
+                data,
+                res.locals.authUser._id
+            );
 
             return responseJsonByStatus(
                 res,
@@ -50,43 +55,24 @@ class productController{
             )
     }
     async index (req, res){
-        // product.find()
-        //     .then(
-        //         product=>responseJsonByStatus(
-        //             res,
-        //             responseSuccess(product)
-        //         )
-        //     )
-        //     .catch(
-        //         e=> responseJsonByStatus(
-        //             res,
-        //             responseErrors(500, e.message)
-        //         )
-        //     )
         try{
-            const {limit=10, page=1}=req.query;
-            const [products, totalproducts]= await Promise.all([
-                Product.find().limit(limit).skip(limit*(page-1)).limit(limit),  //skip: bỏ qua bao nhiêu products
-                Product.count()
-            ])
-            // async/await: tác vụ đồng bộ
-            // Promise: bất đồng bộ
-            const totalPages= Math.ceil(totalproducts/page);
+            const {limit=10, page=1, keyword}=req.query;
+            console.log(keyword);
+            const products= await productController.productService.getListWithPaginate(
+                limit, 
+                page, 
+                {
+                    keyword,
+                }
+            );
             return responseJsonByStatus(
                 res,
-                responseSuccess({
-                    products,
-                    total: totalproducts,
-                    limit: +limit, // '+' đổi từ string snag number
-                    page:+page,
-                    pages: totalPages
-                })
+                responseSuccess(products)
             )
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message),
-                500
+                responseErrors(500, e.message)
             )
         }
 

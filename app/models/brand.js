@@ -5,8 +5,8 @@ const brandSchema = new mongoose.Schema(
     {
         name:{
             type : String,
-            required: [true, 'Tên sản phẩm không được để trống'],
-            maxLength: [200,'Tên sản phẩm không được lớn hơn {MAXLENGTH} ký tự']
+            required: [true, 'Tên thuong hieu không được để trống'],
+            maxLength: [200,'Tên thuong hieu không được lớn hơn {MAXLENGTH} ký tự']
         },
         description:{
             type: String,

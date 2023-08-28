@@ -1,20 +1,23 @@
 import { responseJsonByStatus, responseSuccess, responseErrors } from "../../common/helper.js";
-import Category from "../../models/category.js";
-import categoryService from "../../services/categoryService.js";
-class categoryController{
-    static categoryService = new categoryService();
+import brand from "../../models/brand.js";
+import brandService from "../../services/BrandService.js";
+class brandController{
+    static brandService = new brandService();
+    
     async store(req, res){
+        console.log(1);
         try{
             const data={
                 ...req.body
             }
-            const category = await categoryController.categoryService.store(
+            console.log(data);
+            const brand = await brandController.brandService.store(
                 data,
                 res.locals.authUser._id
                 );
             return responseJsonByStatus(
                 res,
-                responseSuccess(category)
+                responseSuccess(brand)
             )
         } catch(e){
             return responseJsonByStatus(
@@ -27,15 +30,15 @@ class categoryController{
 
     async update(req, res){
         try{
-            const {categoryId}= req.params;
+            const {brandId}= req.params;
             const data = { ...req.body};
-            const categoryUpdated = await categoryController.categoryService.update(
-                categoryId,
+            const brandUpdated = await brandController.brandService.update(
+                brandId,
                 data
             )
             return responseJsonByStatus(
                 res,
-                responseSuccess(categoryUpdated)
+                responseSuccess(brandUpdated)
             )
         } catch(e){
             return responseJsonByStatus(
@@ -47,13 +50,13 @@ class categoryController{
 
     async show(req, res){
         try{
-            const{categoryId} = req.params;
-            const category = await categoryController.categoryService.show({
-                _id:categoryId
+            const{brandId} = req.params;
+            const brand = await brandController.brandService.show({
+                _id:brandId
             })
             return responseJsonByStatus(
                 res,
-                responseSuccess(category)
+                responseSuccess(brand)
             )
         } catch(e){
             return responseJsonByStatus(
@@ -65,11 +68,11 @@ class categoryController{
 
     async detroy(req, res){
         try{
-            const{categoryId} = req.params;
-            const categoryDeleted = await categoryController.categoryService.destroy({
-                _id:categoryId
+            const{brandId} = req.params;
+            const brandDeleted = await brandController.brandService.destroy({
+                _id:brandId
             })
-            if(categoryDeleted.deletedCount===0){
+            if(brandDeleted.deletedCount===0){
                 return responseJsonByStatus(
                     res,
                     responseErrors(400,'xoa danh muc that bai')
@@ -91,8 +94,7 @@ class categoryController{
     async index(req, res){
         try{
             const {limit=10, page=1, name}=req.query;
-            console.log(name);
-            const categories= await categoryController.categoryService.getListWithPaginate(
+            const categories= await brandController.brandService.getListWithPaginate(
                 limit, 
                 page, 
                 {
@@ -113,4 +115,4 @@ class categoryController{
 
 }
 
-export default categoryController;
+export default brandController;

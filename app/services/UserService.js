@@ -38,6 +38,10 @@ class userService{
             authUserId
         );
     }
+    
+    async destroy(id){
+        return await this.userResponsitory.destroy(id)
+    }
 
     async getListWithPaginate(limit=10, page=1, params={}){
         const {level, keyword} = params;
@@ -57,35 +61,6 @@ class userService{
             ]
         }
         return await this.userResponsitory.paginate(limit, page, conditions);
-        // if (level){
-        //     filters.level = level;
-        // }
-
-        // if(keyword){
-        //     filters.$or=[
-        //         {
-        //             email: new RegExp(`${keyword}`)
-        //         },
-        //         {
-        //             name : new RegExp(`${keyword}`)
-        //         }
-        //     ]
-          
-        // }
-
-        // const [users, totalUsers]= await Promise.all([
-        //     User.find(filters).skip(limit*(page-1)).limit(limit),
-        //     User.count(filters)
-        // ]);
-        // console.log(filters);
-        // const totalPages = Math.ceil(totalUsers/page);
-        // return {
-        //     users,
-        //     total: totalUsers,
-        //     limit: +limit,
-        //     page: +page,
-        //     pages: totalPages
-        // }
     }
 }
 export default userService;

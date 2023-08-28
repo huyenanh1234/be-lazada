@@ -10,7 +10,9 @@ class BaseResponsitory{
     setModel(model){
         this.model=model;
     }
-
+    async findById(id){
+        return this.getModel().findOne(id)
+    }
     async store(data, createdById= null){
         if(createdById){
             data.createdById = createdById;
@@ -26,6 +28,10 @@ class BaseResponsitory{
             data
         )
         return true;
+    }
+   
+    async destroy(id){
+        return await this.getModel().deleteOne(id)
     }
    
     async paginate(limit=10, page=1, conditions={}){

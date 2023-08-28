@@ -26,30 +26,43 @@ class userController{
     }
 
     async update(req, res) {
-        const { userId } = req.params;
-        const data = { ...req.body };
-        const userUpdated = await userController.userService.update(data, userId, res.locals.authUser._id)
+        try{
+            const { userId } = req.params;
+            const data = { ...req.body };
+            const userUpdated = await userController.userService.update(data, userId, res.locals.authUser._id)
 
-        return responseJsonByStatus(
-            res,
-            responseSuccess(userUpdated)
-        )
+            return responseJsonByStatus(
+                res,
+                responseSuccess(userUpdated)
+            )
+        } catch(e){
+            return responseJsonByStatus(
+                res,
+                responseErrors(500, e.message)
+            )
+        }
     }
     async show(req, res){
-        const {userId}=req.params;
-        User.findById(userId)
-            .then(
-                user=>responseJsonByStatus(
+        try{
+            const userId=req.body;
+            if(await userController.userService.findById(userId)===null){
+                return responseJsonByStatus(
                     res,
-                    responseSuccess(user)
+                    responseErrors(400,'khong tim thay user can show')
                 )
+            }
+            const user= await userController.userService.findById(userId);
+            return responseJsonByStatus(
+                res,
+                responseSuccess(user)
             )
-            .catch(
-                e=> responseJsonByStatus(
-                    res,
-                    responseErrors(500, e.message)
-                )
+        } catch(e){
+            return responseJsonByStatus(
+                res,
+                responseErrors(500, e.message)
             )
+        }
+        
     }
     async index (req, res){
         try{
@@ -77,19 +90,25 @@ class userController{
     }
     async destroy(req,res){
         try{
-            const{userId} = req.params;
-            const userDeleted = await User.deleteOne({
-                _id:userId
-            })
+            const userId = req.body;
+            if(await userController.userService.findById(userId)===null){
+                return responseJsonByStatus(
+                    res,
+                    responseErrors(400,'khong tim thay user can xoa')
+                )
+            }
+            const userDeleted = await userController.userService.destroy(userId)
+
             if(userDeleted.deletedCount===0){
                 return responseJsonByStatus(
                     res,
                     responseErrors(400,'xoa User that bai')
                 )
             }
+
             return responseJsonByStatus(
                 res,
-                responseSuccess(true)
+                responseSuccess(200, 'Xoa user thanh cong')
             )
         } catch(e){
             return responseJsonByStatus(

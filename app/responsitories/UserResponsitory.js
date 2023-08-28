@@ -12,10 +12,6 @@ class UserResponsitory extends BaseResponsitory{
     async findByPhone(phone){
         return await User.findOne({phone})
     }
-
-    async findById(authId){
-        return await User.findById(authId)
-    }
     
 }
 
