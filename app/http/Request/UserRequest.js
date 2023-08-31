@@ -38,8 +38,8 @@ const validationsStoreOrUpdateUser = [
 ];
 //console.log(validationsStoreOrUpdateUser);
 const validationsIndexUser=[
-    query('limit').isNumeric().withMessage('limit phai la so'),
-    query('page').isNumeric(),
+    query('limit').optional().isNumeric().withMessage('limit phai la so'),
+    query('page').optional().isNumeric(),
     query('level').isIn(Object.values(USERS.level))
         .withMessage('giá trị đã chọn trong trường không hợp lệ').optional(), //isIn đầu vào là một array
     // query('limit').optional().isNumeric().withMessage('limit phai la so'),

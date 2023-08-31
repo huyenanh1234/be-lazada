@@ -11,7 +11,7 @@ const userRouter=(app)=>{
     router.get('', validateIndexUser ,userController.index);
     router.put('/:userId', userController.update);
     router.get('/:userId', userController.show);
-
+    
     app.use('/users',router);
 }
 export default userRouter;

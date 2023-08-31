@@ -66,7 +66,7 @@ class userController{
     }
     async index (req, res){
         try{
-            const {limit=10, page=1, keyword, level}=req.query;
+            const {limit=10, page=1, keyword="", level=""}=req.query;
             const users= await userController.userService.getListWithPaginate(
                 limit, 
                 page, 
