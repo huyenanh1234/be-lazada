@@ -44,14 +44,18 @@ class userController{
     }
     async show(req, res){
         try{
-            const userId=req.body;
-            if(await userController.userService.findById(userId)===null){
+            const userId=req.params;
+            console.log(userId.userId);
+            const user= await userController.userService.findById(userId.userId);
+            console.log(userId.userId);
+            console.log(user);
+            if(!user){
                 return responseJsonByStatus(
                     res,
                     responseErrors(400,'khong tim thay user can show')
                 )
             }
-            const user= await userController.userService.findById(userId);
+            
             return responseJsonByStatus(
                 res,
                 responseSuccess(user)

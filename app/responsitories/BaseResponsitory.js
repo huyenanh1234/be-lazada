@@ -11,7 +11,7 @@ class BaseResponsitory{
         this.model=model;
     }
     async findById(id){
-        return this.getModel().findOne(id)
+        return this.getModel().findById(id)
     }
     async store(data, createdById= null){
         if(createdById){
@@ -20,6 +20,7 @@ class BaseResponsitory{
         return await this.getModel().create(data);
     }
     async update(data, id, updateById){
+        console.log(data,'111')
         if(updateById){
             data.update_id = updateById;
         }
