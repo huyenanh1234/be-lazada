@@ -44,7 +44,7 @@ class userService{
     }
 
     async getListWithPaginate(limit=10, page=1, params={}){
-        const {level, keyword} = params;
+        const {keyword, level} = params;
         let conditions={};
         if (level){
             conditions.level = level
@@ -53,11 +53,14 @@ class userService{
         if(keyword){
             conditions.$or=[
                 {
-                    name: new RegExp(`${keyword}`)
+                    name: new RegExp(`${keyword}`,`i`)
                 },
                 {
-                    email: new RegExp(`${keyword}`)
-                }
+                    email: new RegExp(`${keyword}`,`i`)
+                },
+                {
+                    phone: new RegExp(`${keyword}`,`i`)
+                },
             ]
         }
         return await this.userResponsitory.paginate(limit, page, conditions);

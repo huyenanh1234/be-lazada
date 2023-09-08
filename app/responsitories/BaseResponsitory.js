@@ -40,7 +40,6 @@ class BaseResponsitory{
             this.getModel().find(conditions).skip(limit*(page-1)).limit(limit),
             this.getModel().count(conditions)
         ])
-
         const totalPages = Math.ceil(total/limit);
         return{
             data,

@@ -45,10 +45,7 @@ class userController{
     async show(req, res){
         try{
             const userId=req.params;
-            console.log(userId.userId);
             const user= await userController.userService.findById(userId.userId);
-            console.log(userId.userId);
-            console.log(user);
             if(!user){
                 return responseJsonByStatus(
                     res,
@@ -94,7 +91,12 @@ class userController{
     }
     async destroy(req,res){
         try{
-            const userId = req.body;
+            const id = req.params;
+            const userId={
+                _id: id.userId,
+            };
+
+            console.log(userId)
             if(await userController.userService.findById(userId)===null){
                 return responseJsonByStatus(
                     res,
