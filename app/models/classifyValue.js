@@ -6,6 +6,7 @@ const classifyValueSchema = new mongoose.Schema(
         classify_id:{
             type: ObjectId,
         },
+        
         image:{
             type: String,
         },
@@ -14,4 +15,4 @@ const classifyValueSchema = new mongoose.Schema(
         }
     }
 )
-export default mongoose.model("classifyValue", classifyValueSchema, "classifyValues");
+export default mongoose.model("ClassifyValue", classifyValueSchema, "classify_values");

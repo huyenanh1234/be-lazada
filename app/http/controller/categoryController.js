@@ -1,5 +1,4 @@
 import { responseJsonByStatus, responseSuccess, responseErrors } from "../../common/helper.js";
-import Category from "../../models/category.js";
 import categoryService from "../../services/categoryService.js";
 class categoryController{
     static categoryService = new categoryService();
@@ -19,7 +18,8 @@ class categoryController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
 
@@ -40,7 +40,8 @@ class categoryController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -58,7 +59,8 @@ class categoryController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -72,7 +74,8 @@ class categoryController{
             if(categoryDeleted.deletedCount===0){
                 return responseJsonByStatus(
                     res,
-                    responseErrors(400,'xoa danh muc that bai')
+                    responseErrors(400,'xoa danh muc that bai'),
+                    400
                 )
             }
             return responseJsonByStatus(
@@ -83,7 +86,8 @@ class categoryController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -106,7 +110,8 @@ class categoryController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }

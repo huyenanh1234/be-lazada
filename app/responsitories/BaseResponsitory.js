@@ -14,13 +14,18 @@ class BaseResponsitory{
         return this.getModel().findById(id)
     }
     async store(data, createdById= null){
+        //console.log(data);
         if(createdById){
             data.createdById = createdById;
         }
         return await this.getModel().create(data);
     }
+
+    async storeAll(data){
+        return this.getModel().insertMany(data);
+    }
+
     async update(data, id, updateById){
-        console.log(data,'111')
         if(updateById){
             data.update_id = updateById;
         }

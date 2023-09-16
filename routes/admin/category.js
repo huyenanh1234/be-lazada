@@ -8,7 +8,7 @@ const categoryRouter=(app)=>{
     router.use(authMiddleware);
     router.post('', validateStoreOrUpdateCategory, categoryController.store);
     router.put('/:categoryId', categoryController.update);                                                                                                                                      
-    router.post('/:categoryId', categoryController.show);
+    router.get('/:categoryId', categoryController.show);
     router.delete('/:categoryId', categoryController.detroy);
     router.get('' ,categoryController.index);
     app.use('/categories', router);
