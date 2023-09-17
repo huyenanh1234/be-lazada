@@ -1,5 +1,4 @@
 
-import { log } from "console";
 import crypto from "crypto";
 import moment from "moment";
 export const hashHmacString = (string, algorithm = 'sha1') => {

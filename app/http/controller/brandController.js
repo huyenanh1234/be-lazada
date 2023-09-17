@@ -22,7 +22,8 @@ class brandController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
 
@@ -43,7 +44,8 @@ class brandController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -61,7 +63,8 @@ class brandController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -75,7 +78,8 @@ class brandController{
             if(brandDeleted.deletedCount===0){
                 return responseJsonByStatus(
                     res,
-                    responseErrors(400,'xoa danh muc that bai')
+                    responseErrors(400,'xoa danh muc that bai'),
+                    400
                 )
             }
             return responseJsonByStatus(
@@ -86,7 +90,8 @@ class brandController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -108,7 +113,8 @@ class brandController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }

@@ -5,6 +5,7 @@ import classifyRouter from "./admin/classify.js";
 import productRouter from "./admin/products.js";
 import profileRouter from "./admin/profile.js";
 import userRouter from "./admin/users.js";
+//import authUserRouter from "./user/authUser.js";
 const routers=(app)=>{
     userRouter(app);
     authRouter(app);
@@ -13,6 +14,7 @@ const routers=(app)=>{
     profileRouter(app);
     brandRouter(app);
     classifyRouter(app);
+    //authUserRouter(app);
 }
 
 export default routers;

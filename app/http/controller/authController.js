@@ -8,7 +8,7 @@ import UserService from "../../services/UserService.js";
 
 class AuthController {
     static userService = new UserService();
-    async login(req, res) {
+    async adminLogin(req, res) {
         const {phone, password} = req.body;
         const user = await AuthController.userService.findByPhone(phone);
 
@@ -45,7 +45,34 @@ class AuthController {
             ),
         )
     }
+    async userLogin(req, res) {
+        const {phone, password} = req.body;
+        const user = await AuthController.userService.findByPhone(phone);
+        console.log(user);
+        if (!user) {
+            return responseJsonByStatus(
+                res, 
+                responseErrors(401,'User khong ton tai'),
+                401
+            );
+        }
 
+        if (user.password !== hashHmacString(password)) {
+            return responseJsonByStatus(
+                res, 
+                responseErrors(401,'Pass khong chinh xac'),
+                401
+            );
+        }
+        return responseJsonByStatus(
+            res,
+            responseSuccess(
+                {
+                    user_token: generateJWTToken(user.id)
+                }
+            ),
+        )
+    }
     async logout(req, res){
 
     }
