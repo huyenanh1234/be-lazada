@@ -7,7 +7,8 @@ const brandRouter=(app)=>{
     const brandController = new BrandController();
     router.use(authMiddleware);
     router.post('', validateStoreOrUpdatebrand, brandController.store);
-    router.put('/:brandId', brandController.update);                                                                                                                                      
+    router.put('/:brandId', brandController.update); 
+    router.get('/all', brandController.getAll);                                                                                                                                     
     router.get('/:brandId', brandController.show);
     router.delete('/:brandId', brandController.detroy);
     router.get('' ,brandController.index);

@@ -37,5 +37,8 @@ class brandService{
         }
         return await this.brandResponsitory.paginate(limit, page, conditions);
     }
+    async getAll(conditions = {}) {
+        return await this.brandResponsitory.find();
+    }
 }
 export default brandService;

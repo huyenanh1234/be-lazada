@@ -115,6 +115,22 @@ class categoryController{
             )
         }
     }
+    
+    async getAll(req, res) {
+        try{
+            const categories = await categoryController.categoryService.getAll();
+            return responseJsonByStatus(
+                res,
+                responseSuccess(categories)
+            )
+        } catch(e) {
+            return responseJsonByStatus(
+                res,
+                responseErrors(500, e.message),
+                500
+            )
+        }
+    }
 
 }
 

@@ -119,6 +119,21 @@ class brandController{
         }
     }
 
+    async getAll(req, res) {
+        try{
+            const brands = await brandController.brandService.getAll();
+            return responseJsonByStatus(
+                res,
+                responseSuccess(brands)
+            )
+        } catch (e) {
+            return responseJsonByStatus(
+                res,
+                responseErrors(500, e.message),
+                500
+            )
+        }
+    }
 }
 
 export default brandController;

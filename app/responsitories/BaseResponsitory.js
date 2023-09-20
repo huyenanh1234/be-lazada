@@ -54,5 +54,9 @@ class BaseResponsitory{
             pages:totalPages
         }
     }
+
+    async find(conditions = {}) {
+        return await this.getModel().find(conditions);
+    }
 }
 export default BaseResponsitory;
