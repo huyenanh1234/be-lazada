@@ -20,7 +20,8 @@ class productController{
         } catch (e) {
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -72,7 +73,8 @@ class productController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
 
@@ -86,7 +88,8 @@ class productController{
             if(productDeleted.deletedCount===0){
                 return responseJsonByStatus(
                     res,
-                    responseErrors(400,'xoa product that bai')
+                    responseErrors(400,'xoa product that bai'),
+                    400
                 )
             }
             return responseJsonByStatus(
@@ -96,7 +99,8 @@ class productController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }

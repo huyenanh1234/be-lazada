@@ -1,4 +1,3 @@
-import Category from "../models/category";
 import categoryResponsitory from "../responsitories/CategoryResponsitory";
 class categoryService{
     constructor(){

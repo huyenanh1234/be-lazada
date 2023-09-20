@@ -28,7 +28,8 @@ class profileController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -42,7 +43,8 @@ class profileController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -72,7 +74,8 @@ class profileController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }

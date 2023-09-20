@@ -14,7 +14,8 @@ export const USERS = {
 
 export const STORAGE_PATHS = {
     importUsers: './storage/users/imports/',
-    uploadAvatarUser: './storage/users/avatars/'
+    uploadAvatarUser: './storage/users/avatars/',
+    importCategory:'./storage/categories/'
 }
 
 export const USER_IMPORTS = {

@@ -1,5 +1,5 @@
 import express, { request } from "express";
-import { hashHmacString, responseJsonByStatus, responseSuccess, responseErrors } from "../../common/helper.js";
+import { responseJsonByStatus, responseSuccess, responseErrors } from "../../common/helper.js";
 import User from "../../models/user.js";
 import UserService from "../../services/UserService.js";
 import { level } from "winston";
@@ -20,7 +20,8 @@ class userController{
         } catch (e) {
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -38,7 +39,8 @@ class userController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }
@@ -49,7 +51,8 @@ class userController{
             if(!user){
                 return responseJsonByStatus(
                     res,
-                    responseErrors(400,'khong tim thay user can show')
+                    responseErrors(400,'khong tim thay user can show'),
+                    400
                 )
             }
             
@@ -60,7 +63,8 @@ class userController{
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
         
@@ -100,7 +104,8 @@ class userController{
             if(await userController.userService.findById(userId)===null){
                 return responseJsonByStatus(
                     res,
-                    responseErrors(400,'khong tim thay user can xoa')
+                    responseErrors(400,'khong tim thay user can xoa'),
+                    400
                 )
             }
             const userDeleted = await userController.userService.destroy(userId)
@@ -108,18 +113,21 @@ class userController{
             if(userDeleted.deletedCount===0){
                 return responseJsonByStatus(
                     res,
-                    responseErrors(400,'xoa User that bai')
+                    responseErrors(400,'xoa User that bai'),
+                    400
                 )
             }
 
             return responseJsonByStatus(
                 res,
-                responseSuccess(200, 'Xoa user thanh cong')
+                responseSuccess(200, 'Xoa user thanh cong'),
+                200
             )
         } catch(e){
             return responseJsonByStatus(
                 res,
-                responseErrors(500, e.message)
+                responseErrors(500, e.message),
+                500
             )
         }
     }

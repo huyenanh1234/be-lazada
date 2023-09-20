@@ -15,7 +15,8 @@ const authMiddleware = async(req, res, next)=>{
         if(!user){
             return responseJsonByStatus(
                 res,
-                responseErrors(401, 'User khong ton tai')
+                responseErrors(401, 'User khong ton tai'),
+                401
             );
         };
 
