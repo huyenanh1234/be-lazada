@@ -37,5 +37,8 @@ class categoryService{
         }
         return await this.categoryResponsitory.paginate(limit, page, conditions);
     }
+    async getAll(conditions = {}) {
+        return await this.categoryResponsitory.find(conditions);
+    }
 }
 export default categoryService;

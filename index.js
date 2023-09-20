@@ -15,11 +15,11 @@ app.use(express.json()); //quét form json: nhận các api mà body có content
 app.use(bodyParser.urlencoded({extended: true})) //hai mildelware mà detect gửi lên
 app.use(express.static('storage/users'))
 // Load routes
+routers(app); // function call -> đầu vào là app để khai báo các routs
 
 const PORT = process.env.PORT || 5050;
 app.listen(PORT,()=>{
-    console.log("Server is running");
+    console.log("Server is running port " + PORT);
 });
 
-routers(app); // function call -> đầu vào là app để khai báo các routs
 
